@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="MaxCoinTrader.Views.PortfolioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MaxCoinTrader.Views"
+             xmlns:viewmodel="clr-namespace:MaxCoinTrader.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="450">
+
+    <UserControl.DataContext>
+        <viewmodel:PortfolioViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            x:Name="Date"
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="24">
+            09.09.19
+        </TextBlock>
+
+        <TextBlock
+            x:Name="Message"
+            Grid.Column="0"
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="16"
+            Text="{Binding Message}" />
+    </Grid>
+</UserControl>

@@ -18,6 +18,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock
+            x:Name="MainDate"
             Grid.Column="0"
             Grid.Row="1"
             HorizontalAlignment="Center"

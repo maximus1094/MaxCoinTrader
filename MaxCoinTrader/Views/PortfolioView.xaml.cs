@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MaxCoinTrader
+namespace MaxCoinTrader.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PortfolioView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PortfolioView : UserControl
     {
-        public MainWindow()
+        public PortfolioView()
         {
             InitializeComponent();
-
-            UpdateDate();
-        }
-
-        private void UpdateDate()
-        {
-            DateTime today = DateTime.Today;
-
-            this.MainDate.Text = today.ToShortDateString().Replace("/", ".");
         }
     }
 }
