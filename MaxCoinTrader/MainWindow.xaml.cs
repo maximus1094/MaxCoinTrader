@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaxCoinTrader.Models;
+using MaxCoinTrader.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MaxCoinTrader
 {
@@ -20,18 +9,24 @@ namespace MaxCoinTrader
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PortfolioViewModel _portfolioVM = new PortfolioViewModel();
+        private MarketViewModel _marketVM = new MarketViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            UpdateDate();
+            DataContext = _portfolioVM;
         }
 
-        private void UpdateDate()
+        private void PortfolioButton_Click(object sender, RoutedEventArgs e)
         {
-            DateTime today = DateTime.Today;
+            DataContext = _portfolioVM;
+        }
 
-            this.MainDate.Text = today.ToShortDateString().Replace("/", ".");
+        private void MarketButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = _marketVM;
         }
     }
 }

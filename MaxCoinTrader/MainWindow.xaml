@@ -3,37 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MaxCoinTrader"
+        xmlns:views="clr-namespace:MaxCoinTrader.Views"
+        xmlns:viewmodels="clr-namespace:MaxCoinTrader.ViewModels"
         mc:Ignorable="d"
         Title="Max Coin Trader" Height="600" Width="450" ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate x:Name="PortfolioTemplate" DataType="{x:Type viewmodels:PortfolioViewModel}">
+            <views:PortfolioView />
+        </DataTemplate>
+        <DataTemplate x:Name="MarketTemplate" DataType="{x:Type viewmodels:MarketViewModel}">
+            <views:MarketView />
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            x:Name="MainDate"
-            Grid.Column="0"
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24">
-            09.09.19
-        </TextBlock>
+        <DockPanel
+            Background="Gray"
+            Grid.Row="0"
+            Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="PortfolioButton"
+                        Content="Portfolio" Click="PortfolioButton_Click" />
+                <Button x:Name="MarketButton"
+                        Content="Market" Click="MarketButton_Click" />
+                <Button x:Name="TradingHistoryButton"
+                        Content="Trading History" />
+            </StackPanel>
+        </DockPanel>
 
-        <TextBlock
-            Grid.Column="0"
-            Grid.Row="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="16">
-            Nothing here yet...
-        </TextBlock>
+        <ContentControl
+            Content="{Binding}"
+            Grid.Row="1"
+            Grid.Column="0" />
     </Grid>
 </Window>

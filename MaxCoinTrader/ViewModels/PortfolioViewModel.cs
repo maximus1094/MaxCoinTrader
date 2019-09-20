@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaxCoinTrader.ViewModels
 {
-    internal class PortfolioViewModel : INotifyPropertyChanged
+    internal class PortfolioViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string message = "Nothing here yet...";
+        private string message = "Portfolio.";
 
         public string Message
         {
@@ -28,8 +22,23 @@ namespace MaxCoinTrader.ViewModels
 
                 message = value;
 
-                this.PropertyChanged(this, new PropertyChangedEventArgs(nameof(Message)));
+                OnPropertyChanged(nameof(Message));
             }
+        }
+
+        private string date = "09.10.1994";
+
+        public string Date
+        {
+            get
+            {
+                return date;
+            }
+        }
+
+        public PortfolioViewModel()
+        {
+            date = DateTime.Today.ToShortDateString().Replace("/", ".");
         }
     }
 }

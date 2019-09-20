@@ -55,8 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\PortfolioModel.cs" />
+    <Compile Include="Models\TradingHistoryModel.cs" />
+    <Compile Include="ObservableObject.cs" />
+    <Compile Include="ViewModels\MarketViewModel.cs" />
     <Compile Include="ViewModels\PortfolioViewModel.cs" />
+    <Compile Include="Views\MarketView.xaml.cs">
+      <DependentUpon>MarketView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PortfolioView.xaml.cs">
       <DependentUpon>PortfolioView.xaml</DependentUpon>
     </Compile>
@@ -72,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MarketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PortfolioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
