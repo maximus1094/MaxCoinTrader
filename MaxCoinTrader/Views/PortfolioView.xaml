@@ -16,28 +16,47 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="16" />
+            <!-- Top padding -->
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock
-            x:Name="Date"
+            x:Name="Title"
             Grid.Column="0"
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="24"
-            Text="{Binding Date}" />
+            FontSize="36"
+            Text="{Binding Title}" />
 
         <TextBlock
-            x:Name="Message"
+            x:Name="Date"
             Grid.Column="0"
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="16"
-            Text="{Binding Message}" />
+            Text="{Binding Date}" />
+
+        <ListView
+            Grid.Column="0"
+            Grid.Row="3"
+            Margin="16 16 16 0"
+            ItemsSource="{Binding CoinsList}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Symbol}" />
+                    <GridViewColumn Header="Holding" DisplayMemberBinding="{Binding Holding}" />
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding PriceUSD}" />
+                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" />
+                    <GridViewColumn Header="Gain/Loss" DisplayMemberBinding="{Binding GainLoss}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

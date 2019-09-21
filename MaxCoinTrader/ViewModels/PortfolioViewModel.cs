@@ -1,28 +1,29 @@
-﻿using System;
-using System.ComponentModel;
+﻿using MaxCoinTrader.Models;
+using System;
+using System.Collections.Generic;
 
 namespace MaxCoinTrader.ViewModels
 {
     internal class PortfolioViewModel : ObservableObject
     {
-        private string message = "Portfolio.";
+        private string title = "Portfolio.";
 
-        public string Message
+        public string Title
         {
             get
             {
-                return message;
+                return title;
             }
             set
             {
-                if (message == value)
+                if (title == value)
                 {
                     return;
                 }
 
-                message = value;
+                title = value;
 
-                OnPropertyChanged(nameof(Message));
+                OnPropertyChanged(nameof(Title));
             }
         }
 
@@ -36,9 +37,22 @@ namespace MaxCoinTrader.ViewModels
             }
         }
 
+        private List<Coin> coinsList = new List<Coin>();
+
+        public List<Coin> CoinsList
+        {
+            get
+            {
+                return coinsList;
+            }
+        }
+
         public PortfolioViewModel()
         {
             date = DateTime.Today.ToShortDateString().Replace("/", ".");
+
+            coinsList.Add(new Coin(1, "Bitcoin", "BTC", 1, 10000));
+            coinsList.Add(new Coin(2, "Etherium", "ETH", 7.5f, 250));
         }
     }
 }
