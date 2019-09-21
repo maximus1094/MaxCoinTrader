@@ -1,28 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MaxCoinTrader.ViewModels
+﻿namespace MaxCoinTrader.ViewModels
 {
     internal class MarketViewModel : ObservableObject
     {
-        private string message = "Market";
+        #region Fields
 
-        public string Message
+        private string title = "Market";
+        private string subtitle = "Buy and Sell Coins Here";
+
+        #endregion Fields
+
+        #region Properties
+
+        public string Title
         {
             get
             {
-                return message;
+                return title;
             }
 
             set
             {
-                message = value;
+                title = value;
 
-                OnPropertyChanged(nameof(Message));
+                OnPropertyChanged(nameof(Title));
             }
         }
+
+        public string Subtitle
+        {
+            get
+            {
+                return subtitle;
+            }
+
+            set
+            {
+                subtitle = value;
+
+                OnPropertyChanged(nameof(Subtitle));
+            }
+        }
+
+        #endregion Properties
     }
 }

@@ -3,26 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MaxCoinTrader.Views"
+             xmlns:viewmodel="clr-namespace:MaxCoinTrader.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="450">
+             d:DesignHeight="600" d:DesignWidth="450"
+             Margin="16">
+
+    <UserControl.DataContext>
+        <viewmodel:MarketViewModel />
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock
-            x:Name="Message"
+            x:Name="Title"
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="36"
+            Text="{Binding Title}" />
+
+        <TextBlock
+            x:Name="Subtitle"
             Grid.Column="0"
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            FontSize="16"
+            Margin="0 0 0 32"
+            Text="{Binding Subtitle}" />
+
+        <TextBlock
+            x:Name="Buy"
+            Grid.Column="0"
+            Grid.Row="2"
             FontSize="24"
-            Text="{Binding Message}" />
+            Text="Buy" />
+
+        <Grid
+            Grid.Column="0"
+            Grid.Row="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="SearchText"
+                Grid.Column="0"
+                Grid.Row="0"
+                FontSize="14"
+                Margin="0 0 8 0"
+                Text="Find Coin (by ID)" />
+            <TextBox
+                x:Name="SearchTextBox"
+                Grid.Column="1"
+                Grid.Row="0"
+                TextAlignment="Right" />
+            <Button
+                x:Name="SearchButton"
+                Grid.Column="2"
+                Grid.Row="0"
+                Margin="8 0 0 0"
+                Content="Search" />
+        </Grid>
     </Grid>
 </UserControl>
