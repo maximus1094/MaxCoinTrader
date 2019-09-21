@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodel="clr-namespace:MaxCoinTrader.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="450">
+             d:DesignHeight="600" d:DesignWidth="450"
+             Margin="16 0 16 16">
 
     <UserControl.DataContext>
         <viewmodel:PortfolioViewModel />
@@ -16,8 +17,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="16" />
             <!-- Top padding -->
+            <RowDefinition Height="16" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -40,12 +43,27 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="16"
+            Margin="0 0 0 32"
             Text="{Binding Date}" />
+
+        <TextBlock
+            x:Name="USDAmount"
+            Grid.Column="0"
+            Grid.Row="3"
+            FontSize="12"
+            Text="{Binding USDAmount}" />
+
+        <TextBlock
+            x:Name="TotalPortfolioValue"
+            Grid.Column="0"
+            Grid.Row="4"
+            FontSize="12"
+            Margin="0 0 0 16"
+            Text="{Binding TotalPortfolioValue}" />
 
         <ListView
             Grid.Column="0"
-            Grid.Row="3"
-            Margin="16 16 16 0"
+            Grid.Row="5"
             ItemsSource="{Binding CoinsList}">
             <ListView.View>
                 <GridView>

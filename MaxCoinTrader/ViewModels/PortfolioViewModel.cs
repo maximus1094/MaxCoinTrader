@@ -37,6 +37,26 @@ namespace MaxCoinTrader.ViewModels
             }
         }
 
+        private float usdAmount = 150000f;
+
+        public string USDAmount
+        {
+            get
+            {
+                return $"USD Amount: {usdAmount}";
+            }
+        }
+
+        private float totalPortfolioValue;
+
+        public string TotalPortfolioValue
+        {
+            get
+            {
+                return $"Total Portfolio Value: {totalPortfolioValue}";
+            }
+        }
+
         private List<Coin> coinsList = new List<Coin>();
 
         public List<Coin> CoinsList
@@ -53,6 +73,21 @@ namespace MaxCoinTrader.ViewModels
 
             coinsList.Add(new Coin(1, "Bitcoin", "BTC", 1, 10000));
             coinsList.Add(new Coin(2, "Etherium", "ETH", 7.5f, 250));
+
+            totalPortfolioValue = usdAmount;
+            totalPortfolioValue += AllCoinsToUSDValue(coinsList);
+        }
+
+        private float AllCoinsToUSDValue(List<Coin> coins)
+        {
+            var totalAmount = 0f;
+
+            foreach (var coin in coins)
+            {
+                totalAmount += coin.Value;
+            }
+
+            return totalAmount;
         }
     }
 }
