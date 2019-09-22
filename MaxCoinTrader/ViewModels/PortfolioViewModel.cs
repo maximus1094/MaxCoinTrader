@@ -8,7 +8,7 @@ namespace MaxCoinTrader.ViewModels
     {
         #region Fields
 
-        private string title = "Portfolio.";
+        private string title = "Portfolio";
         private string date = "09.10.1994";
         private float usdAmount = 150000f;
         private float totalPortfolioValue;

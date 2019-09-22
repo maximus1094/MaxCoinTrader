@@ -3,26 +3,340 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MaxCoinTrader.Views"
+             xmlns:viewmodel="clr-namespace:MaxCoinTrader.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="450">
+             d:DesignHeight="600" d:DesignWidth="450"
+             Margin="16">
+
+    <UserControl.DataContext>
+        <viewmodel:MarketViewModel />
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock
-            x:Name="Message"
+            x:Name="Title"
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="36"
+            Text="{Binding Title}" />
+
+        <TextBlock
+            x:Name="Subtitle"
             Grid.Column="0"
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            FontSize="16"
+            Margin="0 0 0 32"
+            Text="{Binding Subtitle}" />
+
+        <!-- BUY SECTION -->
+        <TextBlock
+            x:Name="Buy"
+            Grid.Column="0"
+            Grid.Row="2"
             FontSize="24"
-            Text="{Binding Message}" />
+            Text="Buy" />
+
+        <!-- Find Coin Grid -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="SearchText"
+                Grid.Column="0"
+                Grid.Row="0"
+                FontSize="12"
+                Margin="0 0 8 0"
+                Text="Find Coin (by ID):" />
+            <TextBox
+                x:Name="SearchTextBox"
+                Grid.Column="1"
+                Grid.Row="0" />
+            <Button
+                x:Name="SearchButton"
+                Grid.Column="2"
+                Grid.Row="0"
+                Margin="8 0 0 0"
+                Content="Search" Click="SearchButton_Click" />
+        </Grid>
+
+        <!-- Coin Info Grid -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="CoinInfo"
+                Grid.Column="0"
+                Grid.Row="0"
+                FontSize="12"
+                Text="Coin Info: (Please search for a coin first)" />
+
+            <TextBlock
+                x:Name="CoinInfoName"
+                Grid.Column="0"
+                Grid.Row="1"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Name: -" />
+
+            <TextBlock
+                x:Name="CoinInfoSymbol"
+                Grid.Column="0"
+                Grid.Row="2"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Symbol: -" />
+
+            <TextBlock
+                x:Name="CoinInfoPrice"
+                Grid.Column="0"
+                Grid.Row="3"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Price: -" />
+
+            <TextBlock
+                x:Name="CoinInfoChange24Hours"
+                Grid.Column="0"
+                Grid.Row="4"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Change 24h: -" />
+
+            <Grid
+                Grid.Column="0"
+                Grid.Row="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    x:Name="BuyAmountText"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    FontSize="12"
+                    Margin="0 0 8 0"
+                    Text="Amount (00.00): " />
+
+                <TextBox
+                    x:Name="BuyAmountTextBox"
+                    Grid.Column="1"
+                    Grid.Row="0" />
+
+                <Button
+                    x:Name="BuyButton"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="8 0 0 0"
+                    Content="Buy"
+                    IsEnabled="False" Click="BuyButton_Click" />
+            </Grid>
+        </Grid>
+
+        <!-- SELL SECTION -->
+        <TextBlock
+            x:Name="Sell"
+            Grid.Column="0"
+            Grid.Row="5"
+            FontSize="24"
+            Text="Sell" />
+
+        <!-- Select Coin Grid -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="6">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="SellSelectText"
+                Grid.Column="0"
+                Grid.Row="0"
+                FontSize="12"
+                Margin="0 0 8 0"
+                Text="Select Coin:" />
+
+            <ComboBox
+                Grid.Column="1"
+                Grid.Row="0"
+                ItemsSource="{Binding MyCoins}" />
+        </Grid>
+
+        <!-- Sell Coin Info Grid -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="SellCoinInfo"
+                Grid.Column="0"
+                Grid.Row="0"
+                FontSize="12"
+                Text="Coin Info: (Please select a coin)" />
+
+            <TextBlock
+                x:Name="SellCoinInfoName"
+                Grid.Column="0"
+                Grid.Row="1"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Name: -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoSymbol"
+                Grid.Column="0"
+                Grid.Row="2"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Symbol: -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoHolding"
+                Grid.Column="0"
+                Grid.Row="3"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Holding: -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoOriginalPrice"
+                Grid.Column="0"
+                Grid.Row="4"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Original Price (USD): -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoCurrentPrice"
+                Grid.Column="0"
+                Grid.Row="5"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Current Price (USD): -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoChange24Hours"
+                Grid.Column="0"
+                Grid.Row="6"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Change 24h: -" />
+
+            <TextBlock
+                x:Name="SellCoinInfoGainLoss"
+                Grid.Column="0"
+                Grid.Row="7"
+                FontSize="12"
+                Margin="16 0 0 0"
+                Text="Gain/Loss: -" />
+
+            <Grid
+                Grid.Column="0"
+                Grid.Row="8">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    x:Name="SellAmountText"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    FontSize="12"
+                    Margin="0 0 8 0"
+                    Text="Amount (00.00): " />
+
+                <TextBox
+                    x:Name="SellAmountTextBox"
+                    Grid.Column="1"
+                    Grid.Row="0" />
+
+                <Button
+                    x:Name="SellButton"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="8 0 0 0"
+                    Content="Sell"
+                    IsEnabled="False" />
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
