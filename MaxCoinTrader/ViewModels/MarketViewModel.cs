@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,6 +11,7 @@ namespace MaxCoinTrader.ViewModels
 
         private string title = "Market";
         private string subtitle = "Buy and Sell Coins Here";
+        private ObservableCollection<string> myCoins = new ObservableCollection<string>();
 
         #endregion Fields
 
@@ -45,7 +47,26 @@ namespace MaxCoinTrader.ViewModels
             }
         }
 
+        public ObservableCollection<string> MyCoins
+        {
+            get
+            {
+                return myCoins;
+            }
+
+            private set { }
+        }
+
         #endregion Properties
+
+        public MarketViewModel()
+        {
+            //coinsList.Add(new Coin(1, "Bitcoin", "BTC", 1, 10000));
+            //coinsList.Add(new Coin(2, "Etherium", "ETH", 7.5f, 250));
+
+            myCoins.Add("Bitcoin, Owned: 1.0");
+            myCoins.Add("Etherium, Owned: 7.5");
+        }
 
         public void FindCoinById(int id)
         {
