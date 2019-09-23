@@ -33,7 +33,7 @@
             string infoString = "";
             foreach (var prop in propertiesInfo)
             {
-                infoString += $"{prop.Name} = {this.GetType().GetProperty(prop.Name).GetValue(this)}\n";
+                infoString += $"{prop.Name} = {prop.GetValue(this)}\n";
             }
 
             return infoString;
