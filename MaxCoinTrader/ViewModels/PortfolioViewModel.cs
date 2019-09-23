@@ -76,8 +76,8 @@ namespace MaxCoinTrader.ViewModels
             date = DateTime.Today.ToShortDateString().Replace("/", ".");
 
             // TODO: Later fetch info from DB.
-            coinsList.Add(new Coin(1, "Bitcoin", "BTC", 1, 10000));
-            coinsList.Add(new Coin(2, "Etherium", "ETH", 7.5f, 250));
+            coinsList.Add(new Coin(1, "Bitcoin", "BTC", 2.4f, 1, 10000));
+            coinsList.Add(new Coin(2, "Etherium", "ETH", 1.1f, 7.5f, 250));
 
             totalPortfolioValue = usdAmount;
             totalPortfolioValue += AllCoinsToUSDValue(coinsList);

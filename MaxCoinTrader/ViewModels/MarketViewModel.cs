@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MaxCoinTrader.Models;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -11,6 +13,8 @@ namespace MaxCoinTrader.ViewModels
 
         private string title = "Market";
         private string subtitle = "Buy and Sell Coins Here";
+        private Coin selectedCoinToBuy;
+        private Coin selectedCoinToSell;
         private ObservableCollection<string> myCoins = new ObservableCollection<string>();
 
         #endregion Fields
@@ -127,8 +131,18 @@ namespace MaxCoinTrader.ViewModels
                 "}";
 
             JObject jsonResponse = JObject.Parse(response);
+            JToken data = jsonResponse["data"]["1"];
 
-            //MessageBox.Show($"Id: 1, Price: {jsonResponse["data"]["1"]["quote"]["USD"]["price"].ToString()}");
+            selectedCoinToBuy = new Coin(
+                    Convert.ToInt32(data["id"]),
+                    Convert.ToString(data["name"]),
+                    Convert.ToString(data["symbol"]),
+                    Convert.ToSingle(data["quote"]["USD"]["percent_change_24h"]),
+                    0,
+                    Convert.ToSingle(data["quote"]["USD"]["price"])
+                );
+
+            MessageBox.Show(selectedCoinToBuy.ToString());
         }
     }
 }
