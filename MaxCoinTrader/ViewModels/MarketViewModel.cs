@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace MaxCoinTrader.ViewModels
 {
@@ -11,8 +10,8 @@ namespace MaxCoinTrader.ViewModels
     {
         #region Fields
 
-        private string title = "Market";
-        private string subtitle = "Buy and Sell Coins Here";
+        private readonly Coin defaultCoin = new Coin(-1, "-", "-", 0, 0, 0);
+
         private Coin selectedCoinToBuy;
         private Coin selectedCoinToSell;
         private ObservableCollection<string> myCoins = new ObservableCollection<string>();
@@ -21,33 +20,18 @@ namespace MaxCoinTrader.ViewModels
 
         #region Properties
 
-        public string Title
+        public Coin SelectedCoinToBuy
         {
             get
             {
-                return title;
+                return selectedCoinToBuy;
             }
 
             set
             {
-                title = value;
+                selectedCoinToBuy = value;
 
-                OnPropertyChanged(nameof(Title));
-            }
-        }
-
-        public string Subtitle
-        {
-            get
-            {
-                return subtitle;
-            }
-
-            set
-            {
-                subtitle = value;
-
-                OnPropertyChanged(nameof(Subtitle));
+                OnPropertyChanged(nameof(SelectedCoinToBuy));
             }
         }
 
@@ -67,6 +51,8 @@ namespace MaxCoinTrader.ViewModels
         {
             //coinsList.Add(new Coin(1, "Bitcoin", "BTC", 1, 10000));
             //coinsList.Add(new Coin(2, "Etherium", "ETH", 7.5f, 250));
+
+            selectedCoinToBuy = defaultCoin;
 
             myCoins.Add("Bitcoin, Owned: 1.0");
             myCoins.Add("Etherium, Owned: 7.5");
@@ -133,16 +119,22 @@ namespace MaxCoinTrader.ViewModels
             JObject jsonResponse = JObject.Parse(response);
             JToken data = jsonResponse["data"]["1"];
 
-            selectedCoinToBuy = new Coin(
-                    Convert.ToInt32(data["id"]),
-                    Convert.ToString(data["name"]),
-                    Convert.ToString(data["symbol"]),
-                    Convert.ToSingle(data["quote"]["USD"]["percent_change_24h"]),
-                    0,
-                    Convert.ToSingle(data["quote"]["USD"]["price"])
+            SelectedCoinToBuy = new Coin(
+                Convert.ToInt32(data["id"]),
+                Convert.ToString(data["name"]),
+                Convert.ToString(data["symbol"]),
+                Convert.ToSingle(data["quote"]["USD"]["percent_change_24h"]),
+                0,
+                Convert.ToSingle(data["quote"]["USD"]["price"])
                 );
+        }
 
-            MessageBox.Show(selectedCoinToBuy.ToString());
+        public void BuySelectedCoin(float amount)
+        {
+            if (selectedCoinToBuy.Id != -1 && amount > 0)
+            {
+                MessageBox.Show($"Buying {amount} of {selectedCoinToBuy.Name} for {selectedCoinToBuy.PriceUSD * amount}.");
+            }
         }
     }
 }

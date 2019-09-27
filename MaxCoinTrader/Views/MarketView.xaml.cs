@@ -44,7 +44,24 @@ namespace MaxCoinTrader.Views
         // TODO: Move Click logic from code-behind to ViewModel
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hey buddy!");
+            float amount = -1;
+
+            try
+            {
+                amount = Convert.ToSingle(BuyAmountTextBox.Text);
+            }
+            catch (FormatException fe)
+            {
+                MessageBox.Show($"ERROR in MarketView::BuyButton_Click::FormatException::\n{fe.StackTrace}");
+            }
+            catch (OverflowException oe)
+            {
+                MessageBox.Show($"ERROR in MarketView::BuyButton_Click::OverflowException::\n{oe.StackTrace}");
+            }
+
+            var marketVM = (MarketViewModel)DataContext;
+
+            marketVM.BuySelectedCoin(amount);
         }
     }
 }
